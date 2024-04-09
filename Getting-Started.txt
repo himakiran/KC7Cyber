@@ -1,0 +1,37 @@
+KC7Cyber : Getting Started
+
+URLs
+https://kc7cyber.com/
+https://github.com/KC7-Foundation/kc7_data
+https://dataexplorer.azure.com/clusters/kc7001.eastus # Azure Data Explorer
+
+KQL 101 (Kusto query Language)
+
+Employees | take 10  
+
+Employees | count
+
+Employees | where name has "Linda"  Employees | where name contains "Linda"
+
+"contains" is more performance intensive than "has"
+"has" does not find strings if they are a prefix of longer terms and it depends on the surrounding of the searched string.
+Long story short, use "contains" if "has" does not respond.
+
+Employees | where name == "Linda Holbert"        # Specific Match
+
+Email 
+| where sender has "envolvelabs"
+| distinct sender
+| count
+
+let linda_ips = Employees
+| where name has "Linda"
+| distinct ip_addr;
+OutboundBrowsing
+| where src_ip in (linda_ips)         # Let operator
+
+
+
+
+
+
